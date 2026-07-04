@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deskline Webclient</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #1a1a1a; color: #ffffff; }
+        .loader-container { text-align: center; }
+        .loader { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #ffffff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="loader-container">
+        <div class="loader"></div>
+        <p>Verbindung zu Deskline wird hergestellt...</p>
+    </div>
+
+    <script>
+        // Service Worker registrieren (zwingend für PWA-Installierbarkeit auf GitHub)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registriert'))
+                    .catch(err => console.error('SW Fehler', err));
+            });
+        }
+
+        // Sofortige Weiterleitung zum Deskline-Login
+        window.location.href = "https://webclient4.deskline.net/M10/de/login";
+    </script>
+</body>
+</html>
